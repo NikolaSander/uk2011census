@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset=utf-8>
+  <title>Migration Flows in the UK from the 2011 Census</title>
+  <meta name=description content="Migration Flows in the UK from the 2011 Census">
+  <meta name=viewport content="width=device-width, initial-scale=1.0">
+  <link href="style.css" rel="stylesheet" media="all">
+  
+  <script src="circular-migration-plot.min.js"></script>
+</head>
+<body>
+  <div id=container class="container">
+  
+   	<header role="banner">
+  		<h1 style="text-align:left">Migration Flows in the United Kingdom from the 2011 Census</h1>
+		
+		<div class="lead-in">
+		Explore migration flows by age between NUTS-1 and NUTS-2 regions of the UK from the 2011 Census. <br> Click on a region to discover flows at the NUTS-2 level. Note that flows with less than 1,500 migrants are not shown. 
+		<p><font color="gray"> by Nikola Sander, John Stillwell and Nik Lomax</font></p> 
+		<p><i>This visualisation complements Chapter 16 in the "Handbook of Census Resources, Methods and Applications: Unlocking the UK 2011 Census".</i></p>
+		</div>
+
+
+	<hr>
+	</header>	
+
+	<div class="wrap">
+		<main role="main">
+		<nav role=navigation>
+		<div id="timeline"></div>
+		</nav>		
+		<div id="chart"></div>
+		</main>
+	</div>
+
+  <script>
+     var labels = {
+		1000: 'all ages',
+		1001: '0-14',
+		1004: '15-19',
+		1005: '20-24',
+		1006: '25-34',
+		1007: '35-44',
+		1008: '45-59',
+		1009: '60+',
+    }
+
+    CircularMigrationPlot({
+      data: 'ukcensus-broadage-ordered.json',
+      chart:{
+        element: '#chart',
+        mylayout: {
+          threshold: 1500,
+          labelThreshold: 1500,
+		  colors: ['#00E6D0','#00E200','#8CE200','#FFDB00','#FF6B21','#C00000','#FF64DB','#CC64FF','#7E00CC','#000078','#0000FF','#00A7E2']
+			  }
+      },
+      timeline: {
+        element: '#timeline',
+        formatter: function(d) {
+          return labels[d]
+        }
+      }
+	  });
+  </script>
+ 
+	<hr>
+    
+ 	<footer role="contentinfo">
+ 		<div class="license">
+		This visualisation has been created with a <a href="https://github.com/jo/circular-migration-plot"  target="_blank">custom d3.js library</a> originally developed by Null2 for <a href="http://www.global-migration.info"  target="_blank">The Global Flow of People</a> and is made available under <a href="http://creativecommons.org/licenses/by/4.0/"  target="_blank">CC BY 4.0</a></p> 
+		Datasource: <a href="http://www.nomisweb.co.uk/census/2011"  target="_blank">ONS</a>
+		</div>
+	</footer>
+	
+</div>
+	
+</body>
+</html>
